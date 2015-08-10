@@ -1,0 +1,18 @@
+<!--Do a look-up and find the First Name of the current user -->
+<g:evaluate>
+ var name  = gs.getUser().getFirstName()
+   if(name == ''){
+      <!--If there is no value for First Name, then query the sys_user table and get the user_name value -->
+   var usr = new GlideRecord('sys_user');
+    usr.get(gs.getUserID());
+   name = usr.user_name.getDisplayValue()
+}
+if(name == ''){
+name ="empty";
+}
+</g:evaluate>
+
+<!-- Wrap the actual value however you choose (i.e. H3 or p tags) -->
+<div class="user_name">
+  ${name}
+</div>
